@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Structure Entries plugin for Craft CMS 3.x
  *
@@ -8,7 +9,7 @@
  * @copyright Copyright (c) 2019 Tim Kelty
  */
 
-namespace timkelty\structureentries\assetbundles\structureentriesfieldfield;
+namespace timkelty\craftcms\structureentries\assetbundles\structureentriesfieldfield;
 
 use Craft;
 use craft\web\AssetBundle;
