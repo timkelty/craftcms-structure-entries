@@ -1,0 +1,40 @@
+{
+    "name": "timkelty/structure-entries",
+    "description": "Structure entries selection field",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "structure entries"
+    ],
+    "support": {
+        "docs": "https://github.com/timkelty/structure-entries/blob/master/README.md",
+        "issues": "https://github.com/timkelty/structure-entries/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tim Kelty",
+            "homepage": "https://github.com/timkelty"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "timkelty\\structureentries\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Structure Entries",
+        "handle": "structure-entries",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/timkelty/structure-entries/master/CHANGELOG.md",
+        "class": "timkelty\\structureentries\\StructureEntries"
+    }
+}

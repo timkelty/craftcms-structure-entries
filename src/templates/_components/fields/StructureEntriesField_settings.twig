@@ -1,0 +1,26 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Structure Entries plugin for Craft CMS
+ *
+ * StructureEntriesField Field Settings
+ *
+ * @author    Tim Kelty
+ * @copyright Copyright (c) 2019 Tim Kelty
+ * @link      https://github.com/timkelty
+ * @package   StructureEntries
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("timkelty\\structureentries\\assetbundles\\structureentries\\StructureEntriesAsset") %}
+
+{{ forms.textField({
+    label: 'Some Attribute',
+    instructions: 'Enter some attribute here.',
+    id: 'someAttribute',
+    name: 'someAttribute',
+    value: field['someAttribute']})
+}}
