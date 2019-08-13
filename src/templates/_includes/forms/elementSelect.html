@@ -1,0 +1,68 @@
+{% if name is defined and name %}
+    <input type="hidden" name="{{ name }}" value="">
+{% endif -%}
+
+{% set structure = (structure is defined ? structure : false) %}
+{% set elements = (elements is defined and elements ? elements : []) -%}
+{% set jsClass = (jsClass is defined and jsClass ? jsClass : 'Craft.BaseElementSelectInput') -%}
+{% set sources = (sources is defined and sources ? sources : null) -%}
+{% set criteria = (criteria is defined and criteria ? criteria : null) -%}
+{% set sourceElementId = (sourceElementId is defined and sourceElementId ? sourceElementId : null) -%}
+{% set storageKey = (storageKey is defined and storageKey ? storageKey : null) -%}
+{% set viewMode = (viewMode is defined ? viewMode : 'list') %}
+{% set sortable = (sortable is defined ? sortable : true) %}
+{% set fieldId = (fieldId is defined ? fieldId : null) %}
+{% set branchLimit = (branchLimit is defined ? branchLimit : null) %}
+
+<div id="{{ id }}" class="{{ structure ? 'structureselect' : 'elementselect' }}"
+        {%- if block('attr') is defined %} {{ block('attr') }}{% endif %}>
+    {% if structure %}
+        <ul class="elements structure">
+            {% nav element in elements %}
+                <li id="{{ id }}-category-{{ element.id }}">
+                    {% set indent = (element.level - 1) * 35 %}
+                    <div class="row" style="margin-left: -{{ indent }}px; padding-left: {{ indent }}px;">
+                        {%- include "_elements/element" with { element: element, context: 'field' } -%}
+                    </div>
+
+                    {% ifchildren %}
+                        <ul>
+                            {% children %}
+                        </ul>
+                    {% endifchildren %}
+                </li>
+            {% endnav %}
+        </ul>
+    {% else %}
+        <div class="elements">
+            {% for element in elements %}
+                {% include "_elements/element" with {
+                    context: 'field',
+                    size: (viewMode == 'large' ? 'large' : 'small')
+                } %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="btn add icon dashed">{{ selectionLabel is defined ? selectionLabel : "Choose"|t('app') }}</div>
+</div>
+
+{% set jsSettings = {
+    id: id|namespaceInputId,
+    name: name|namespaceInputName,
+    elementType: elementType,
+    sources: sources,
+    criteria: criteria,
+    sourceElementId: sourceElementId,
+    viewMode: viewMode,
+    limit: limit ?? null,
+    showSiteMenu: showSiteMenu ?? false,
+    modalStorageKey: storageKey,
+    fieldId: fieldId,
+    sortable: sortable,
+    branchLimit: branchLimit
+} %}
+
+{% js %}
+    new {{ jsClass }}({{ jsSettings|json_encode|raw }});
+{% endjs %}

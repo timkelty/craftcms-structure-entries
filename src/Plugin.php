@@ -15,11 +15,15 @@ class Plugin extends \craft\base\Plugin
     {
         parent::init();
 
+        $this->setComponents([
+            'structures' => \timkelty\craftcms\structureentries\services\Structures::class,
+        ]);
+
         Event::on(
             Fields::class,
             Fields::EVENT_REGISTER_FIELD_TYPES,
             function (RegisterComponentTypesEvent $event) {
-                $event->types[] = fields\StructureEntries::class;
+                $event->types[] = \timkelty\craftcms\structureentries\fields\StructureEntries::class;
             }
         );
     }

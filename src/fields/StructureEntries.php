@@ -1,59 +1,69 @@
 <?php
 
+/**
+ * @link https://craftcms.com/
+ * @copyright Copyright (c) Pixel & Tonic, Inc.
+ * @license https://craftcms.github.io/license/
+ */
+
 namespace timkelty\craftcms\structureentries\fields;
 
-use timkelty\structureentries\StructureEntries;
-use timkelty\structureentries\assetbundles\structureentriesfieldfield\StructureEntriesFieldFieldAsset;
 use Craft;
-use craft\base\ElementInterface;
-use craft\base\Field;
-use craft\helpers\Db;
-use yii\db\Schema;
-use craft\helpers\Json;
+use craft\elements\Entry;
+use craft\elements\db\EntryQuery;
 
-class StructureEntries extends \craft\fields\Entries
+/**
+ * StructureEntries represents an Structure Entries field.
+ *
+ * @author Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @since 3.0
+ */
+class StructureEntries extends BaseStructureRelationField
 {
-
-    /**
-     * @inheritdoc
-     */
-    public $allowLimit = false;
-
-    /**
-     * @inheritdoc
-     */
-    public $allowMultipleSources = false;
-
-    /**
-     * @var int|null Branch limit
-     */
-    public $branchLimit;
-
-    /**
-     * @inheritdoc
-     */
-    protected $settingsTemplate = '_components/fieldtypes/Categories/settings';
-
-    /**
-     * @inheritdoc
-     */
-    protected $inputTemplate = '_components/fieldtypes/Categories/input';
-
-    /**
-     * @inheritdoc
-     */
-    protected $inputJsClass = 'Craft.CategorySelectInput';
-
-    /**
-     * @inheritdoc
-     */
-    protected $sortable = false;
+    // Static
+    // =========================================================================
 
     /**
      * @inheritdoc
      */
     public static function displayName(): string
     {
-        return Craft::t('structure-entries', 'Structure Entries');
+        return Craft::t('app', 'Structure Entries');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected static function elementType(): string
+    {
+        return Entry::class;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function defaultSelectionLabel(): string
+    {
+        return Craft::t('app', 'Add an entry');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function valueType(): string
+    {
+        return EntryQuery::class;
+    }
+
+    /**
+     * Returns the sources that should be available to choose from within the field's settings
+     *
+     * @return array
+     */
+    protected function availableSources(): array
+    {
+        return array_filter(parent::availableSources(), function ($source) {
+            return $source['structureId'] ?? false;
+        });
     }
 }
