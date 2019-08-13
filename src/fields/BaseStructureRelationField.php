@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @link https://craftcms.com/
- * @copyright Copyright (c) Pixel & Tonic, Inc.
- * @license https://craftcms.github.io/license/
- */
-
 namespace timkelty\craftcms\structureentries\fields;
 
 use Craft;
@@ -13,13 +7,8 @@ use craft\base\ElementInterface;
 use craft\helpers\ElementHelper;
 use craft\helpers\ArrayHelper;
 use timkelty\craftcms\structureentries\Plugin;
+use timkelty\craftcms\structureentries\web\assets\field\FieldAssets;
 
-/**
- * Categories represents a Categories field.
- *
- * @author Pixel & Tonic, Inc. <support@pixelandtonic.com>
- * @since 3.0
- */
 abstract class BaseStructureRelationField extends \craft\fields\BaseRelationField
 {
     // Properties
@@ -29,9 +18,6 @@ abstract class BaseStructureRelationField extends \craft\fields\BaseRelationFiel
      * @var int|null Branch limit
      */
     public $branchLimit;
-
-    // Public Methods
-    // =========================================================================
 
     /**
      * @inheritdoc
@@ -73,7 +59,7 @@ abstract class BaseStructureRelationField extends \craft\fields\BaseRelationFiel
                 ->all();
 
             // Fill in any gaps
-            $structuresService = Plugin::getInstance()->getStructures();
+            $structuresService = Plugin::getInstance()->structures;
             $structuresService->fillGapsInElements($elements);
 
             // Enforce the branch limit
@@ -112,6 +98,9 @@ abstract class BaseStructureRelationField extends \craft\fields\BaseRelationFiel
         if (empty($source)) {
             return '<p class="error">' . Craft::t('app', 'This field is not set to a valid source.') . '</p>';
         }
+
+        // Register our asset bundle
+        Craft::$app->getView()->registerAssetBundle(FieldAssets::class);
 
         return parent::getInputHtml($value, $element);
     }

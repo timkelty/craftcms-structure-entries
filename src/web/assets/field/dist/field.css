@@ -1,0 +1,10 @@
+.structureselect {
+  position: relative;
+  min-height: 30px;
+}
+body.ltr .structureselect .structure ul {
+  margin-left: 12px;
+}
+body.rtl .structureselect .structure ul {
+  margin-right: 12px;
+}

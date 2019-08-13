@@ -1,23 +1,11 @@
 <?php
 
-/**
- * @link https://craftcms.com/
- * @copyright Copyright (c) Pixel & Tonic, Inc.
- * @license https://craftcms.github.io/license/
- */
-
 namespace timkelty\craftcms\structureentries\fields;
 
 use Craft;
 use craft\elements\Entry;
 use craft\elements\db\EntryQuery;
 
-/**
- * StructureEntries represents an Structure Entries field.
- *
- * @author Pixel & Tonic, Inc. <support@pixelandtonic.com>
- * @since 3.0
- */
 class StructureEntries extends BaseStructureRelationField
 {
     // Static
