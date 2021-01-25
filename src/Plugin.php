@@ -8,16 +8,47 @@ use yii\base\Event;
 
 class Plugin extends \craft\base\Plugin
 {
+    // /**
+    //  * @inheritdoc
+    //  */
+    // public $allowLimit = false;
+
+    // /**
+    //  * @inheritdoc
+    //  */
+    // public $allowMultipleSources = false;
+
+    // /**
+    //  * @var int|null Branch limit
+    //  */
+    // public $branchLimit;
+
+    // /**
+    //  * @inheritdoc
+    //  */
+    // protected $settingsTemplate = '_components/fieldtypes/Categories/settings';
+
+    // /**
+    //  * @inheritdoc
+    //  */
+    // protected $inputTemplate = '_components/fieldtypes/Categories/input';
+
+    // /**
+    //  * @inheritdoc
+    //  */
+    // protected $inputJsClass = 'Craft.CategorySelectInput';
+
+    // /**
+    //  * @inheritdoc
+    //  */
+    // protected $sortable = false;
+
     /**
      * @inheritdoc
      */
     public function init()
     {
         parent::init();
-
-        $this->setComponents([
-            'structures' => \timkelty\craftcms\structureentries\services\Structures::class,
-        ]);
 
         Event::on(
             Fields::class,

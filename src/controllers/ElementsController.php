@@ -43,7 +43,7 @@ class ElementsController extends \craft\controllers\BaseElementsController
                 ->all();
 
             // Fill in the gaps
-            $structuresService = Plugin::getInstance()->structures;
+            $structuresService = Craft::$app->getStructures();
             $structuresService->fillGapsInElements($elements);
 
             // Enforce the branch limit
