@@ -6,7 +6,6 @@ use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\errors\InvalidTypeException;
-use timkelty\craftcms\structureentries\Plugin;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
 
